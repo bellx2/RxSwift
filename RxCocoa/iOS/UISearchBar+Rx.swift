@@ -91,8 +91,9 @@ extension UISearchBar {
             }
         return ControlEvent(events: source)
     }
+	
 #endif
-    
+	
     /**
      Reactive wrapper for delegate method `searchBarSearchButtonClicked`.
      */
@@ -103,6 +104,23 @@ extension UISearchBar {
         }
         return ControlEvent(events: source)
     }
+	
+	public var rx_textDidBeginEditing: ControlEvent<Void> {
+		let source: Observable<Void> = rx_delegate.observe(#selector(UISearchBarDelegate.searchBarTextDidBeginEditing(_:)))
+			.map { _ in
+				return ()
+		}
+		return ControlEvent(events: source)
+	}
+	
+	public var rx_textDidEndEditing: ControlEvent<Void> {
+		let source: Observable<Void> = rx_delegate.observe(#selector(UISearchBarDelegate.searchBarTextDidEndEditing(_:)))
+			.map { _ in
+				return ()
+		}
+		return ControlEvent(events: source)
+	}
+	
 }
 
 #endif
